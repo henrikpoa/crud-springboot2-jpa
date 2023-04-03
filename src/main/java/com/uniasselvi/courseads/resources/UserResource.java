@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +24,9 @@ import com.uniasselvi.courseads.services.UserService;
 public class UserResource {
 	
 	@Autowired
-	private UserService service;
+	private UserService service;	
 	
+	@CrossOrigin
 	@GetMapping
 	public ResponseEntity<List<User>> findAll() {
 		List <User> list = service.findAll();
@@ -37,6 +39,7 @@ public class UserResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<User> insert (@RequestBody User obj) {
 		obj = service.insert(obj);
@@ -45,6 +48,7 @@ public class UserResource {
 		return ResponseEntity.created(uri).body(obj);
 	}
 	
+	@CrossOrigin
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
